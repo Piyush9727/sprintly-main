@@ -1,0 +1,33 @@
+.main{
+    min-width: 400px;
+    min-height: 200px;
+    margin: 0;
+    gap: 20px;
+    padding: 15px;
+}
+.header{
+    margin: 0;
+    font-size: 25px;
+    font-weight: 600;
+    color: #1d15ff;
+    text-align: center;
+}
+
+.form{
+    gap:10px;
+}
+.form input{
+    color: #131f60;
+    height: 30px;
+    background-color: #f9f9ff;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    outline: none;
+}
+.form input:focus{
+    border: 1px solid #3c15ff;
+    border-radius: 3px;
+    box-shadow: #FAFAFA;
+}
