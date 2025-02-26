@@ -1,67 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   Users,
   Calendar,
   Clock,
-  Briefcase,
+  UserCheck,
   CheckSquare,
   FolderKanban,
-  Menu,
+  ChevronDown,
+  Building2
 } from 'lucide-react';
 
-interface SidebarProps {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
-  const navItems = [
-    { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
-    { path: '/employees', icon: Users, label: 'Employees' },
-    { path: '/leave-management', icon: Calendar, label: 'Leave Management' },
-    { path: '/attendance', icon: Clock, label: 'Attendance' },
-    { path: '/clients', icon: Briefcase, label: 'Clients' },
-    { path: '/tasks', icon: CheckSquare, label: 'Tasks' },
-    { path: '/projects', icon: FolderKanban, label: 'Projects' },
-  ];
+const Sidebar = () => {
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
 
   return (
-    <aside
-      className={`${
-        isOpen ? 'w-64' : 'w-20'
-      } bg-white transition-all duration-300 ease-in-out h-screen fixed left-0 top-0 z-30 border-r border-gray-200`}
-    >
-      <div className="flex items-center justify-between h-16 px-4">
-        {isOpen ? (
-          <h1 className="text-xl font-bold">PM System</h1>
-        ) : (
-          <span className="text-xl font-bold">PM</span>
-        )}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-2 rounded-lg hover:bg-gray-100"
-        >
-          <Menu size={20} />
-        </button>
+    <aside className="w-64 bg-white border-r border-gray-200 min-h-screen p-4">
+      <div className="flex items-center gap-2 mb-8">
+        <Building2 className="h-8 w-8 text-blue-600" />
+        <h1 className="text-xl font-semibold">PMS</h1>
       </div>
 
-      <nav className="mt-4">
-        {navItems.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 ${
-                isActive ? 'bg-gray-100 text-blue-600' : 'text-gray-600'
-              } hover:bg-gray-50 transition-colors`
-            }
+      <nav className="space-y-2">
+        <NavLink to="/" className="sidebar-link">
+          <LayoutDashboard size={20} />
+          Dashboard
+        </NavLink>
+
+        <div>
+          <button
+            onClick={() => setIsProjectsOpen(!isProjectsOpen)}
+            className="sidebar-link w-full flex justify-between items-center"
           >
-            <item.icon size={20} />
-            {isOpen && <span className="ml-3">{item.label}</span>}
-          </NavLink>
-        ))}
+            <div className="flex items-center gap-2">
+              <FolderKanban size={20} />
+              Projects
+            </div>
+            <ChevronDown
+              size={16}
+              className={`transform transition-transform ${
+                isProjectsOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+          {isProjectsOpen && (
+            <div className="ml-8 mt-2 space-y-2">
+              <NavLink to="/projects" className="sidebar-link">
+                All Projects
+              </NavLink>
+              <NavLink to="/estimates" className="sidebar-link">
+                Estimates
+              </NavLink>
+            </div>
+          )}
+        </div>
+
+        <NavLink to="/employees" className="sidebar-link">
+          <Users size={20} />
+          Employees
+        </NavLink>
+
+        <NavLink to="/leave" className="sidebar-link">
+          <Calendar size={20} />
+          Leave Management
+        </NavLink>
+
+        <NavLink to="/attendance" className="sidebar-link">
+          <Clock size={20} />
+          Attendance
+        </NavLink>
+
+        <NavLink to="/clients" className="sidebar-link">
+          <UserCheck size={20} />
+          Clients
+        </NavLink>
+
+        <NavLink to="/tasks" className="sidebar-link">
+          <CheckSquare size={20} />
+          Tasks
+        </NavLink>
       </nav>
     </aside>
   );

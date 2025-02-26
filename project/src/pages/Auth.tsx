@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
-import { Building2, Mail, Lock, User, ArrowRight } from 'lucide-react';
+import React, { useState } from "react";
+import { Building2, Mail, Lock, User, ArrowRight } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook, FaLinkedin } from "react-icons/fa";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name: '',
-    confirmPassword: ''
+    email: "",
+    password: "", 
+    name: "",
+    confirmPassword: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle authentication logic here
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
+  };
+
+  const handleSocialLogin = (platform: string) => {
+    console.log(`Signing in with ${platform}`);
+    // Implement social login logic here
   };
 
   return (
@@ -30,7 +36,8 @@ const Auth = () => {
             Welcome to Project Management System
           </h2>
           <p className="text-white/80 text-lg">
-            Streamline your workflow, collaborate with your team, and achieve more together.
+            Streamline your workflow, collaborate with your team, and achieve
+            more together.
           </p>
         </div>
       </div>
@@ -45,12 +52,12 @@ const Auth = () => {
 
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {isLogin ? 'Welcome back!' : 'Create your account'}
+              {isLogin ? "Welcome back!" : "Create your account"}
             </h2>
             <p className="text-gray-600">
               {isLogin
-                ? 'Please enter your credentials to access your account'
-                : 'Fill in the details below to get started'}
+                ? "Please enter your credentials to access your account"
+                : "Fill in the details below to get started"}
             </p>
           </div>
 
@@ -65,7 +72,9 @@ const Auth = () => {
                   <input
                     type="text"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter your name"
                   />
@@ -82,7 +91,9 @@ const Auth = () => {
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Enter your email"
                 />
@@ -98,7 +109,9 @@ const Auth = () => {
                 <input
                   type="password"
                   value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
                   className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Enter your password"
                 />
@@ -115,7 +128,9 @@ const Auth = () => {
                   <input
                     type="password"
                     value={formData.confirmPassword}
-                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, confirmPassword: e.target.value })
+                    }
                     className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Confirm your password"
                   />
@@ -127,18 +142,31 @@ const Auth = () => {
               type="submit"
               className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
             >
-              {isLogin ? 'Sign In' : 'Create Account'}
+              {isLogin ? "Sign In" : "Create Account"}
               <ArrowRight size={20} />
             </button>
           </form>
 
+          {/* Social Login Icons */}
+          <div className="flex justify-center gap-6 mt-6">
+            <button onClick={() => handleSocialLogin("Google")}>
+              <FcGoogle className="w-8 h-8" />
+            </button>
+            <button onClick={() => handleSocialLogin("Facebook")}>
+              <FaFacebook className="w-8 h-8 text-blue-600" />
+            </button>
+            <button onClick={() => handleSocialLogin("LinkedIn")}>
+              <FaLinkedin className="w-8 h-8 text-blue-700" />
+            </button>
+          </div>
+
           <p className="mt-6 text-center text-sm text-gray-600">
-            {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
+            {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
             <button
               onClick={() => setIsLogin(!isLogin)}
               className="text-blue-600 hover:text-blue-700 font-medium"
             >
-              {isLogin ? 'Sign up' : 'Sign in'}
+              {isLogin ? "Sign up" : "Sign in"}
             </button>
           </p>
         </div>
